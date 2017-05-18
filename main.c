@@ -1,72 +1,69 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAXM 2
-#define MAXN 2
-#define MAXP 2
+#define MAX 4
 
+int recherchePosition(int x, int n, int tab[])
+{
+    int i=0;
+    while ((tab[i]<x) && (i<=n))
+        i++;
+    return i;
 
-void addition(int A[][MAXN],int B[][MAXN],int C[][MAXN], int m,int n){
-    int i,j;
-    for(i=0;i<m;i++){
-        for(j=0;j<n;j++)
-            C[i][j]=A[i][j]+B[i][j];
-    }
 }
 
-void soustraction(int A[][MAXN],int B[][MAXN],int C[][MAXN], int m,int n){
-    int i,j;
-    for(i=0;i<m;i++){
-        for(j=0;j<n;j++)
-            C[i][j]=A[i][j]-B[i][j];
-    }
+void insereEntier( int x, int position, int tab[], int n)       // si n=MAX
+{
+    //if(n==MAX){
+      //  n=n-1;//La valeur dans la case d'indice n=MAX est supprimé pour conserver un tableau avec un nombre de valeur =<MAX.
+    //}
+
+    int i=0;
+    for (i=n; i>=position;i--)
+        tab[i+1]=tab[i];
+    tab[position]=x;
 }
-void produit(int A[][MAXN],int B[][MAXP],int C[][MAXN], int m,int n,int p){
-    int i,j,k;
-    for(i=0;i<m;i++){
-        for(j=0;j<p;j++){
-            for(k=0;k<n;k++)
-                C[i][j]+=A[i][k]*B[k][j];}
-
-
-            }
-
-    }
 
 
 int main()
 {
+    int position, n=0,entier,i;
+    int continuer;
+    int tab[MAX];
+    /*tab[0]=20;
+    tab[1]=22;
+    tab[2]=24;*/
 
-    int C[MAXN][MAXN];
-    int A[MAXM][MAXN];
-    int B[MAXN][MAXP];
-    //B[0][0]=5;
-    //A[0][0]=5;
-    //addition(A,B,C,1,1);
-    //printf("%d\n",C[0][0]);
-    int i,j;
-    for(i=0;i<MAXM;i++){//matrice A et affichage matrice A
-        for(j=0;j<MAXN;j++)
-            scanf("%d",&A[i][j]);}
-    for(i=0;i<MAXM;i++){
-            printf("\n");
-            for(j=0;j<MAXN;j++)
-                printf("\t%d",A[i][j]);}
+   /* position= recherchePosition(21, 3, tab);
+    printf("%d\n",position);
+    insereEntier( 21, position, tab, 3);
+    printf("%d", tab[2]);*/
 
-    for(i=0;i<MAXN;i++){//matrice B et affichage matrice B
-        for(j=0;j<MAXP;j++)
-            scanf("%d",&B[i][j]);}
-    for(i=0;i<MAXN;i++){
-            printf("\n");
-            for(j=0;j<MAXP;j++)
-                printf("\t%d",B[i][j]);}
+    do{
+            printf("Entrez un entier svp\n");
+            scanf("%d",&entier);
+            position=recherchePosition(entier,n,tab);
+            insereEntier(entier, position, tab, n);
+            n++;
+            for(i=0;i<n;i++)
+                printf("\n%d",tab[i]);
+            printf("\nPour continuer, tapez 1\n");
+            scanf("%d",&continuer);
+            } while((continuer==1)&&(n<MAX));*
 
-    produit(A,B,C,MAXM,MAXN,MAXP);
 
-    for(i=0;i<MAXN;i++){
-            printf("\n");
-            for(j=0;j<MAXN;j++)
-                printf("\t%d",C[i][j]);}
+
+
+
+
+
+
+
+
+
+
+
 
 
     return 0;
+
 }
